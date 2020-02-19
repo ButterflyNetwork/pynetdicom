@@ -520,8 +520,7 @@ class ApplicationEntity(object):
         assoc.name = "RequestorThread@{}".format(timestamp)
 
         # Setup the association's communication socket
-        sock = AssociationSocket(assoc, address=bind_address)
-        sock.tls_args = tls_args or {}
+        sock = self._create_socket(assoc, bind_address, tls_args)
         assoc.set_socket(sock)
 
         # Association Acceptor object -> remote AE
@@ -578,6 +577,11 @@ class ApplicationEntity(object):
             assoc.start()
 
         return assoc
+
+    def _create_socket(self, assoc, address, tls_args):
+        sock = AssociationSocket(assoc, address=address)
+        sock.tls_args = tls_args or {}
+        return sock
 
     @property
     def dimse_timeout(self):
