@@ -438,10 +438,6 @@ class RequestHandler(BaseRequestHandler):
         assoc = Association(self.ae, MODE_ACCEPTOR)
         assoc._server = self.server
 
-        # Set the thread name
-        timestamp = datetime.strftime(datetime.now(), "%Y%m%d%H%M%S")
-        assoc.name = f"AcceptorThread@{timestamp}"
-
         sock = AssociationSocket(assoc, client_socket=self.request)
         assoc.set_socket(sock)
 

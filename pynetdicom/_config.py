@@ -1,3 +1,4 @@
+import uuid
 """pynetdicom configuration options"""
 
 
@@ -151,3 +152,5 @@ Examples
 >>> from pynetdicom import _config
 >>> _config.STORE_RECV_CHUNKED_DATASET = True
 """
+
+TENANT_ID = None

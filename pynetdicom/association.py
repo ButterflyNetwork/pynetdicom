@@ -1,6 +1,7 @@
 """
 Defines the Association class which handles associating with peers.
 """
+from datetime import datetime
 from io import BytesIO
 import logging
 import os
@@ -8,6 +9,7 @@ from pathlib import Path
 import threading
 import time
 from typing import Union, Optional
+import uuid
 
 from pydicom import dcmread
 from pydicom.dataset import Dataset
@@ -152,6 +154,12 @@ class Association(threading.Thread):
         # Thread setup
         threading.Thread.__init__(self)
         self.daemon = True
+
+        # Tenant setup
+        tenant_id = _config.TENANT_ID or "<default>"
+        timestamp = datetime.strftime(datetime.now(), "%Y%m%d%H%M%S")
+        self.name = f"{self.mode.capitalize()}Thread@{timestamp}:{tenant_id}"
+        self.dul.name = self.name
 
     def abort(self):
         """Abort the :class:`Association` by sending an A-ABORT to the remote

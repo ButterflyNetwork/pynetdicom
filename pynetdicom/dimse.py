@@ -270,6 +270,7 @@ class DIMSEServiceProvider(object):
                 # Ugly hack, but would block the DUL otherwise
                 t = threading.Thread(
                     target=self.assoc._serve_request,
+                    name=self.assoc.name,
                     args=(primitive, context_id)
                 )
                 t.start()

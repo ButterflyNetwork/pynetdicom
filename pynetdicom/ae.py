@@ -509,10 +509,6 @@ class ApplicationEntity(object):
         # Association
         assoc = Association(self, MODE_REQUESTOR)
 
-        # Set the thread name
-        timestamp = datetime.strftime(datetime.now(), "%Y%m%d%H%M%S")
-        assoc.name = f"RequestorThread@{timestamp}"
-
         # Setup the association's communication socket
         sock = self._create_socket(assoc, bind_address, tls_args)
         assoc.set_socket(sock)
