@@ -44,6 +44,7 @@ from pynetdicom.pdu_primitives import (
     SCP_SCU_RoleSelectionNegotiation,
 )
 from pynetdicom.status import code_to_category, STORAGE_SERVICE_CLASS_STATUS
+from pynetdicom.utils import make_target
 
 
 # pylint: enable=no-name-in-module
@@ -145,7 +146,7 @@ class Association(threading.Thread):
         self._is_paused = False
 
         # Thread setup
-        threading.Thread.__init__(self)
+        threading.Thread.__init__(self, target=make_target(self.run_reactor))
         self.daemon = True
 
     def abort(self):
@@ -578,7 +579,7 @@ class Association(threading.Thread):
         LOGGER.info("Requesting Association")
         self.acse.negotiate_association()
 
-    def run(self):
+    def run_reactor(self):
         """The main :class:`Association` reactor."""
         # Start the DUL thread if not already started
         if not self._started_dul:
