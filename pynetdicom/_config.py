@@ -1,4 +1,3 @@
-import uuid
 """pynetdicom configuration options"""
 
 
@@ -154,3 +153,8 @@ Examples
 """
 
 TENANT_ID = None
+"""Distinguish association threads by ID.
+
+The value stored in `TENANT_ID` will be set in the name of each thread created
+by pynetdicom. This can be used to e.g filter the logs created by pynetdicom.
+"""

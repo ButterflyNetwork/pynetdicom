@@ -9,7 +9,6 @@ from pathlib import Path
 import threading
 import time
 from typing import Union, Optional
-import uuid
 
 from pydicom import dcmread
 from pydicom.dataset import Dataset
